@@ -1,12 +1,13 @@
 @extends('welcome')
 
 @section('content')
-    <div class="w-full bg-black min-h-screen px-4 sm:px-8 py-6">
+    <div class="mt-5 bg-black min-h-screen  " style="padding-left: 15%; padding-right: 15%;">
 
         {{-- HEADER --}}
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-10 mt-2">
             <div>
-                <h2 class="text-xl sm:text-2xl font-black tracking-tight bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent mb-1">
+                <h2
+                    class="text-xl sm:text-2xl font-black tracking-tight bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent mb-1">
                     Hello, {{ auth()->user()->name ?? 'User' }}!
                 </h2>
                 <p class="text-slate-500 text-xs sm:text-sm font-medium">
@@ -26,22 +27,26 @@
 
         {{-- STATS CARDS --}}
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-5 mb-10">
-            <div class="bg-[#0a0a0a] border border-[#1a1a1a] p-5 rounded-2xl hover:border-[#2a2a2a] transition-all duration-300">
+            <div
+                class="bg-[#0a0a0a] border border-[#1a1a1a] p-5 rounded-2xl hover:border-[#2a2a2a] transition-all duration-300">
                 <p class="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mb-3">Total Files</p>
                 <p class="text-2xl font-black text-white">{{ $stats['total'] ?? 0 }}</p>
             </div>
 
-            <div class="bg-[#0a0a0a] border border-[#1a1a1a] p-5 rounded-2xl hover:border-[#2a2a2a] transition-all duration-300">
+            <div
+                class="bg-[#0a0a0a] border border-[#1a1a1a] p-5 rounded-2xl hover:border-[#2a2a2a] transition-all duration-300">
                 <p class="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mb-3">Paid</p>
                 <p class="text-2xl font-black text-emerald-400">{{ $stats['paid'] ?? 0 }}</p>
             </div>
 
-            <div class="bg-[#0a0a0a] border border-[#1a1a1a] p-5 rounded-2xl hover:border-[#2a2a2a] transition-all duration-300">
+            <div
+                class="bg-[#0a0a0a] border border-[#1a1a1a] p-5 rounded-2xl hover:border-[#2a2a2a] transition-all duration-300">
                 <p class="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mb-3">Unpaid</p>
                 <p class="text-2xl font-black text-rose-400">{{ $stats['unpaid'] ?? 0 }}</p>
             </div>
 
-            <div class="bg-[#0a0a0a] border border-[#1a1a1a] p-5 rounded-2xl hover:border-[#2a2a2a] transition-all duration-300">
+            <div
+                class="bg-[#0a0a0a] border border-[#1a1a1a] p-5 rounded-2xl hover:border-[#2a2a2a] transition-all duration-300">
                 <p class="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mb-3">Total Spend</p>
                 <p class="text-2xl font-black text-white">${{ number_format($stats['spend'] ?? 0, 2) }}</p>
             </div>
@@ -54,7 +59,8 @@
                     <h3 class="text-sm font-black text-white uppercase tracking-wide">Statement History</h3>
                     <p class="text-[10px] text-slate-500 mt-1">All your uploaded statements</p>
                 </div>
-                <span class="text-[9px] text-slate-500 font-black uppercase bg-[#111] px-3 py-1 rounded-full">Encrypted</span>
+                <span
+                    class="text-[9px] text-slate-500 font-black uppercase bg-[#111] px-3 py-1 rounded-full">Encrypted</span>
             </div>
 
             <div class="overflow-x-auto">
@@ -63,8 +69,10 @@
                         <tr class="text-slate-500 text-[10px] uppercase border-b border-[#1a1a1a] bg-[#050505]">
                             <th class="px-6 py-4 font-black">File</th>
                             <th class="px-6 py-4 font-black">Date</th>
+                            <th class="px-6 py-4 font-black">Price</th>
                             <th class="px-6 py-4 font-black">Status</th>
                             <th class="px-6 py-4 font-black">Accuracy</th>
+                            <th class="px-6 py-4 font-black">Download PDF</th>
                             <th class="px-6 py-4 font-black text-right">Action</th>
                         </tr>
                     </thead>
@@ -77,13 +85,16 @@
 
                             <tr class="hover:bg-white/5 transition-all duration-200 border-b border-[#111] {{ !$report || $report->status === 'analyzing' ? 'processing' : '' }}"
                                 data-report-id="{{ $report->id ?? '' }}">
-                                
+
                                 {{-- FILE NAME --}}
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-3">
                                         <div class="w-8 h-8 rounded-lg bg-[#1a1a1a] flex items-center justify-center">
-                                            <svg class="w-4 h-4 text-[#6a4dff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                            <svg class="w-4 h-4 text-[#6a4dff]" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                                </path>
                                             </svg>
                                         </div>
                                         <span class="text-white text-xs font-bold">{{ $upload->file_name }}</span>
@@ -92,8 +103,26 @@
 
                                 {{-- DATE --}}
                                 <td class="px-6 py-4 text-slate-400 text-xs">
-                                    {{ $upload->created_at->format('d M Y') }}
+                                    {{ $upload->created_at->format('d M Y, h:i A') }}
                                 </td>
+
+                                <td class="px-6 py-4 text-xs font-bold text-center">
+
+    @if($report && $report->payment_status === 'pending')
+        <span class="text-amber-400">
+            PENDING
+        </span>
+
+    @elseif($report && $report->price)
+        <span class="text-emerald-400">
+            ${{ number_format($report->price, 2) }}
+        </span>
+
+    @else
+        <span class="text-slate-500">--</span>
+    @endif
+
+</td>
 
                                 {{-- STATUS --}}
                                 <td class="px-6 py-4">
@@ -105,14 +134,16 @@
                                     @elseif($report->status === 'completed')
                                         <span class="inline-flex items-center gap-2 text-emerald-400 font-bold text-xs">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7"></path>
                                             </svg>
                                             Completed
                                         </span>
                                     @elseif($report->status === 'failed')
                                         <span class="inline-flex items-center gap-2 text-red-400 font-bold text-xs">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M6 18L18 6M6 6l12 12"></path>
                                             </svg>
                                             Failed
                                         </span>
@@ -132,10 +163,30 @@
                                     @endif
                                 </td>
 
+                                {{-- DOWNLOAD PDF --}}
+                                <td class="px-6 py-4">
+                                    @if ($report && $report->status === 'completed' && $report->payment_status === 'paid')
+                                        <a href="{{ route('report.download', $upload->id) }}"
+                                            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#6a4dff] hover:bg-[#5a3de5] text-white text-xs font-bold transition-all duration-200 hover:scale-105">
+
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4">
+                                                </path>
+                                            </svg>
+
+                                            Download
+                                        </a>
+                                    @else
+                                        <span class="text-slate-500 text-xs">--</span>
+                                    @endif
+                                </td>
+
                                 {{-- ACTION --}}
                                 <td class="px-6 py-4 text-right">
                                     @if (!$report || $report->status === 'analyzing')
-                                        <span class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#1a1a1a] text-white text-xs">
+                                        <span
+                                            class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#1a1a1a] text-white text-xs">
                                             <span class="loader w-3 h-3"></span>
                                             Processing
                                         </span>
@@ -143,23 +194,32 @@
                                         <a href="{{ route('lock', $report->id) }}"
                                             class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold transition-all duration-200 hover:scale-105">
                                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                                </path>
                                             </svg>
                                             Pay Now
                                         </a>
                                     @elseif($report->status === 'completed' && $report->payment_status === 'paid')
                                         <a href="{{ route('report', $upload->id) }}"
                                             class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#6a4dff] hover:bg-[#5a3de5] text-white text-xs font-bold transition-all duration-200 hover:scale-105">
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                </path>
                                             </svg>
                                             Edit & View
                                         </a>
                                     @elseif($report->status === 'failed')
-                                        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500/20 text-red-400 text-xs font-bold">
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        <span
+                                            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500/20 text-red-400 text-xs font-bold">
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                             </svg>
                                             Failed
                                         </span>
@@ -170,11 +230,15 @@
                             <tr>
                                 <td colspan="5" class="text-center text-slate-500 py-16">
                                     <div class="flex flex-col items-center gap-3">
-                                        <svg class="w-12 h-12 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        <svg class="w-12 h-12 text-slate-600" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                            </path>
                                         </svg>
                                         <p class="text-sm">No uploads found</p>
-                                        <p class="text-xs text-slate-600">Upload your first bank statement to get started</p>
+                                        <p class="text-xs text-slate-600">Upload your first bank statement to get started
+                                        </p>
                                     </div>
                                 </td>
                             </tr>
@@ -193,10 +257,21 @@
         }
 
         @keyframes dots {
-            0% { content: ''; }
-            33% { content: '.'; }
-            66% { content: '..'; }
-            100% { content: '...'; }
+            0% {
+                content: '';
+            }
+
+            33% {
+                content: '.';
+            }
+
+            66% {
+                content: '..';
+            }
+
+            100% {
+                content: '...';
+            }
         }
 
         /* Spinner */
@@ -211,7 +286,9 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* Custom scrollbar */
@@ -219,13 +296,16 @@
             width: 6px;
             height: 6px;
         }
+
         ::-webkit-scrollbar-track {
             background: #0a0a0a;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #1a1a1a;
             border-radius: 10px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #2a2a2a;
         }

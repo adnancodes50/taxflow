@@ -98,7 +98,7 @@
             {{-- Login Link --}}
             <div class="mt-8 pt-6 border-t border-[#222222] text-center">
                 <a href="{{ route('login') }}"
-                   class="text-[10px] font-black text-slate-500 hover:text-[#6a4dff] uppercase tracking-widest transition-colors">
+                   class="text-[10px] font-black text-[#6a4dff] uppercase tracking-widest transition-colors">
                     Already have an account? Sign In
                 </a>
             </div>

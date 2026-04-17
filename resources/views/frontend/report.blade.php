@@ -48,7 +48,7 @@
         $netIncome = $totalIncome - $totalExpenses;
     @endphp
 
-    <div class="w-full px-4 md:px-6 py-6 text-white bg-black min-h-screen">
+    <div  class="mt-5 bg-black min-h-screen  " style="padding-left: 15%; padding-right: 15%;">
         <!-- Header with Business Name -->
         <div class="mb-8">
             <h2 class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
@@ -105,7 +105,7 @@
                                 </svg>
                                 <div class="w-2 h-2 rounded-full {{ $cat['name'] === 'Gross Profit and Income' ? 'bg-green-500' : 'bg-red-500' }}"></div>
                                 <div>
-                                    <h3 class="font-semibold text-lg">{{ $cat['name'] }}</h3>
+                                    <h3 class="font-semibold text-lg text-white">{{ $cat['name'] }}</h3>
                                     <p class="text-xs text-gray-500 mt-1">{{ $cat['count'] }} transactions</p>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
                             @php $isIncome = $cat['name'] === 'Gross Profit and Income'; @endphp
 
                             <div class="text-right">
-                                <div class="font-bold text-lg">${{ number_format(abs($cat['total']), 2) }}</div>
+                                <div class="font-bold text-lg text-white">${{ number_format(abs($cat['total']), 2) }}</div>
                                 <div class="text-xs {{ $isIncome ? 'text-green-500' : 'text-red-500' }} font-medium">
                                     {{ $isIncome ? 'Income' : 'Expense' }}
                                 </div>
@@ -128,7 +128,7 @@
                                         <!-- MERCHANT ROW -->
                                         <div class="flex justify-between items-center p-4 pl-12">
                                             <div class="flex items-center gap-3">
-                                                <input type="checkbox" 
+                                                <input type="checkbox"
                                                        class="merchant-checkbox w-4 h-4 rounded border-gray-600 bg-transparent text-[#6a4dff] focus:ring-[#6a4dff] focus:ring-offset-0"
                                                        data-merchant="{{ $merchant['merchant'] }}">
                                                 <div>
@@ -180,7 +180,7 @@
                 @endforeach
             </select>
 
-            <button id="applyBtn" 
+            <button id="applyBtn"
                 class="bg-[#6a4dff] hover:bg-[#5a3de5] text-white px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105">
                 Apply to selected
             </button>
@@ -235,7 +235,7 @@
             const categoryIndex = el.dataset.category;
             const content = document.querySelector(`.category-content-${categoryIndex}`);
             const arrow = document.querySelector(`.category-arrow-${categoryIndex}`);
-            
+
             el.onclick = (e) => {
                 // Don't toggle if clicking on checkbox inside header (but there is none)
                 e.stopPropagation();
@@ -248,7 +248,7 @@
         document.getElementById('applyBtn').addEventListener('click', () => {
             const selected = [];
             const checkboxes = document.querySelectorAll('.merchant-checkbox:checked');
-            
+
             checkboxes.forEach(cb => {
                 selected.push(cb.dataset.merchant);
             });
@@ -293,13 +293,13 @@
         function updateBulkBar() {
             const checked = document.querySelectorAll('.merchant-checkbox:checked');
             const count = checked.length;
-            
+
             if (count > 0) {
                 bulkBar.classList.remove('hidden');
             } else {
                 bulkBar.classList.add('hidden');
             }
-            
+
             selectedCountSpan.innerText = count + ' selected';
         }
 

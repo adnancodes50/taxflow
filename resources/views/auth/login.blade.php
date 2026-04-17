@@ -62,13 +62,13 @@
                         <input type="checkbox" name="remember" class="mr-2 rounded border-gray-600 bg-transparent">
                         Remember me
                     </label>
-{{-- 
+
                     @if (Route::has('password.request'))
                         <a href="{{ route('password.request') }}"
                            class="text-[10px] text-slate-500 hover:text-[#6a4dff] uppercase tracking-widest">
                             Forgot?
                         </a>
-                    @endif --}}
+                    @endif
                 </div>
 
                 {{-- Button --}}
@@ -84,7 +84,7 @@
             <div class="mt-8 pt-6 border-t border-[#222222] text-center">
                 @if (Route::has('register'))
                     <a href="{{ route('register') }}"
-                       class="text-[10px] font-black text-slate-500 hover:text-[#6a4dff] uppercase tracking-widest transition-colors">
+                       class="text-[10px] font-black text-[#6a4dff] uppercase tracking-widest transition-colors">
                         Don't have an account? Create one
                     </a>
                 @endif

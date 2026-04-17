@@ -51,12 +51,30 @@ class AdminDashboardController extends Controller
         ));
     }
 
-    public function getOrder()
-    {
-        $reports = Report::with('upload.user')
-    ->latest()
-    ->paginate(1); // 10 per page
+   public function getOrder()
+{
+    $reports = Report::with('upload.user')
+        ->latest()
+        ->paginate(4);
 
-        return view('admin.order', compact('reports'));
-    }
+    // ✅ Global stats (ALL records, not paginated)
+    $totalOrders = Report::count();
+    $paidOrders = Report::where('payment_status', 'paid')->count();
+    $pendingOrders = Report::where('payment_status', '!=', 'paid')
+        ->whereNotIn('status', ['analyzing', 'failed'])
+        ->count();
+    $processingOrders = Report::where('status', 'analyzing')->count();
+    $failedOrders = Report::where('status', 'failed')->count();
+    $totalRevenue = Report::where('payment_status', 'paid')->sum('price');
+
+    return view('admin.order', compact(
+        'reports',
+        'totalOrders',
+        'paidOrders',
+        'pendingOrders',
+        'processingOrders',
+        'failedOrders',
+        'totalRevenue'
+    ));
+}
 }

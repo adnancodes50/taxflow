@@ -19,20 +19,11 @@
                 <div class="flex items-center gap-3">
                     <div class="bg-[#0a0a0a] border border-[#1a1a1a] px-4 py-2 rounded-xl">
                         <span class="text-xs text-slate-400">Total Orders:</span>
-                        <span class="text-white font-bold ml-2">{{ $reports->count() }}</span>
-                    </div>
+<span class="text-white font-bold ml-2">{{ $totalOrders }}</span>                    </div>
                 </div>
             </div>
         </div>
 
-        {{-- STATS CARDS --}}
-        @php
-            $paidOrders = $reports->where('payment_status', 'paid')->count();
-            $pendingOrders = $reports->where('payment_status', '!=', 'paid')->where('status', '!=', 'analyzing')->where('status', '!=', 'failed')->count();
-            $processingOrders = $reports->where('status', 'analyzing')->count();
-            $failedOrders = $reports->where('status', 'failed')->count();
-            $totalRevenue = $reports->where('payment_status', 'paid')->sum('price');
-        @endphp
 
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
             <div class="bg-[#0a0a0a] border border-[#1a1a1a] p-4 rounded-xl hover:border-[#2a2a2a] transition-all duration-300">
@@ -148,7 +139,8 @@
 
                                 {{-- DATE --}}
                                 <td class="px-6 py-4 text-center text-slate-400 text-xs">
-                                    {{ $report->created_at->format('M d, Y') }}
+                                                                        {{ $report->created_at->format('M d, Y h:i A') }}
+
                                 </td>
 
                                 {{-- AMOUNT --}}

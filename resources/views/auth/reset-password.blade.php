@@ -1,39 +1,98 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
-        @csrf
+    <div class="flex flex-col items-center justify-center min-h-[calc(100vh-160px)] px-4">
 
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+        <div class="w-full max-w-lg bg-[#111111] border border-[#222222] rounded-2xl p-10 shadow-2xl">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            {{-- Heading --}}
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-black text-white mb-2 uppercase tracking-tight">
+                    Reset Password
+                </h2>
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest">
+                    Create a new secure password
+                </p>
+            </div>
+
+            {{-- Errors --}}
+            @if ($errors->any())
+                <div class="bg-red-500/10 border border-red-500/20 text-red-500 p-3 rounded-xl text-[10px] font-black uppercase tracking-widest mb-6 text-center">
+                    {{ $errors->first() }}
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('password.store') }}" class="space-y-4">
+                @csrf
+
+                {{-- Token --}}
+                <input type="hidden" name="token" value="{{ $request->route('token') }}">
+
+                {{-- Email --}}
+                <div>
+                    <label class="block text-[8px] font-black text-slate-500 uppercase tracking-[0.2em] mb-2 ml-1">
+                        Email Address
+                    </label>
+                    <input
+                        id="email"
+                        type="email"
+                        name="email"
+                        value="{{ old('email', $request->email) }}"
+                        required
+                        autofocus
+                        autocomplete="username"
+                        class="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#6a4dff]/50 transition-all text-sm"
+                        placeholder="email@example.com"
+                    >
+                </div>
+
+                {{-- Password --}}
+                <div>
+                    <label class="block text-[8px] font-black text-slate-500 uppercase tracking-[0.2em] mb-2 ml-1">
+                        New Password
+                    </label>
+                    <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        required
+                        autocomplete="new-password"
+                        class="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#6a4dff]/50 transition-all text-sm"
+                        placeholder="••••••••"
+                    >
+                </div>
+
+                {{-- Confirm Password --}}
+                <div>
+                    <label class="block text-[8px] font-black text-slate-500 uppercase tracking-[0.2em] mb-2 ml-1">
+                        Confirm Password
+                    </label>
+                    <input
+                        id="password_confirmation"
+                        type="password"
+                        name="password_confirmation"
+                        required
+                        autocomplete="new-password"
+                        class="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#6a4dff]/50 transition-all text-sm"
+                        placeholder="••••••••"
+                    >
+                </div>
+
+                {{-- Button --}}
+                <button
+                    type="submit"
+                    class="w-full bg-[#6a4dff] hover:bg-[#6a4dff]/90 text-white font-bold py-4 rounded-xl shadow-xl shadow-[#6a4dff]/30 transition-all uppercase tracking-widest text-[10px] mt-6"
+                >
+                    Reset Password
+                </button>
+            </form>
+
+            {{-- Back to Login --}}
+            <div class="mt-8 pt-6 border-t border-[#222222] text-center">
+                <a href="{{ route('login') }}"
+                   class="text-[10px] font-black text-slate-500 hover:text-[#6a4dff] uppercase tracking-widest transition-colors">
+                    Back to Sign In
+                </a>
+            </div>
+
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
+    </div>
 </x-guest-layout>

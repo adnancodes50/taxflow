@@ -44,7 +44,7 @@
 
             {{-- STATUS MESSAGE --}}
             <div class="text-center">
-                <p id="statusText" class="text-sm text-[#6a4dff]">
+                <p id="statusText" class="text-sm !text-[#6a4dff]">
                     Please wait while we analyze your statement...
                 </p>
             </div>
@@ -53,25 +53,26 @@
     </div>
 
     {{-- SCRIPT --}}
-   <script>
-const uploadId = "{{ $uploadId }}";
-const isLoggedIn = {{ auth()->check() ? 'true' : 'false' }};
+    <script>
+        const uploadId = "{{ $uploadId }}";
+        const isLoggedIn = {{ auth()->check() ? 'true' : 'false' }};
 
-const messages = [
-    "Uploading statement...",
-    "Reading your file...",
-    "Analyzing transactions...",
-    "Categorizing data...",
-    "Finalizing report..."
-];
+        const messages = [
+            "Uploading statement...",
+            "Reading your file...",
+            "Analyzing transactions...",
+            "Categorizing data...",
+            "Finalizing report..."
+        ];
 
-let msgIndex = 0;
+        let msgIndex = 0;
 
-function rotateMessages() {
+        function rotateMessages() {
     const status = document.getElementById('statusText');
 
     if (msgIndex < messages.length) {
-        status.innerText = messages[msgIndex];
+        status.innerText = messages[msgIndex]; // ✅ THIS WAS MISSING
+        status.style.color = "#6a4dff"; // keep purple
         msgIndex++;
     } else {
         status.innerText = messages[messages.length - 1];
@@ -80,38 +81,38 @@ function rotateMessages() {
     setTimeout(rotateMessages, 2000);
 }
 
-window.onload = function() {
+        window.onload = function() {
 
-    if (!uploadId) {
-        alert("Upload ID missing");
-        return;
-    }
+            if (!uploadId) {
+                alert("Upload ID missing");
+                return;
+            }
 
-    if (!isLoggedIn) {
-        document.getElementById('statusText').innerText = "Please login or register to continue";
+            if (!isLoggedIn) {
+                document.getElementById('statusText').innerText = "Please login or register to continue";
 
-        setTimeout(() => {
-            window.location.href = "/login";
-        }, 2000);
+                setTimeout(() => {
+                    window.location.href = "/login";
+                }, 2000);
 
-        return;
-    }
+                return;
+            }
 
-    rotateMessages();
+            rotateMessages();
 
-    // ✅ IMPORTANT: USE FETCH (NOT sendBeacon)
-    fetch(`/process-analysis/${uploadId}`, {
-        method: "POST",
-        headers: {
-            "X-CSRF-TOKEN": "{{ csrf_token() }}"
-        }
-    })
-    .catch(err => console.error(err));
+            // ✅ IMPORTANT: USE FETCH (NOT sendBeacon)
+            fetch(`/process-analysis/${uploadId}`, {
+                    method: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    }
+                })
+                .catch(err => console.error(err));
 
-    // ✅ redirect after request is sent
-    setTimeout(() => {
-        window.location.href = "/dashboard";
-    }, 2000);
-};
-</script>
+            // ✅ redirect after request is sent
+            setTimeout(() => {
+                window.location.href = "/dashboard";
+            }, 2000);
+        };
+    </script>
 @endsection

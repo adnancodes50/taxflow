@@ -102,7 +102,7 @@
                         <h3 class="text-sm font-bold text-white uppercase tracking-wide">AI Configuration</h3>
                     </div>
                     <div>
-                        <label class="text-xs text-slate-400 font-medium uppercase tracking-wider">AI API Key</label>
+                        <label class="text-xs text-slate-400 font-medium uppercase tracking-wider">Open Ai Api Ke</label>
                         <input type="text"
                             name="ai_key"
                             value="{{ $settings->ai_key ?? '' }}"
@@ -131,7 +131,7 @@
         </form>
 
     </div>
-   
+
 
 </div>
 
